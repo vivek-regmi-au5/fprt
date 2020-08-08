@@ -6,7 +6,7 @@ class Nav extends Component {
     return (
       <div>
         {" "}
-        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-light bg-light ">
           <Link to="/" class="navbar-brand">
             CMSLogo
           </Link>
@@ -38,11 +38,11 @@ class Nav extends Component {
               </button>
             </form>
             <div class="navbar-nav ml-auto">
-              <Link to="/movie" class="nav-item nav-link">
-                Movie
+              <Link to="/products" class="nav-item nav-link">
+                Products
               </Link>
-              <Link to="/soap" class="nav-item nav-link">
-                Soap
+              <Link to="/brands" class="nav-item nav-link">
+                Brands
               </Link>
               <Link to="/signup" class="nav-item nav-link">
                 Register

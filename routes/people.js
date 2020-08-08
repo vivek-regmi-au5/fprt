@@ -77,7 +77,7 @@ router.post(
         if (image) personField.image = image;
       }
       const newPerson = new Person(personField);
-      console.log(newPerson);
+
       await newPerson.save();
       res.status(200).json({ newPerson });
 
@@ -147,7 +147,7 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const personData = await Person.find();
-    console.log(personData);
+
     res.status(200).json({ persons: personData });
   } catch (error) {
     res.status(500).json({ msg: "Server Error" });
@@ -209,7 +209,6 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     var person = await Person.findOneAndDelete(req.params.id);
-    console.log(person);
 
     return res.status(200).json({ msg: "User successfully deleted" });
   } catch (error) {

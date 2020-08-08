@@ -45,7 +45,7 @@ router.post(
         if (image) categoryField.image = image;
       }
       const newcategory = new Category(categoryField);
-      console.log(newcategory);
+
       await newcategory.save();
       res.status(200).json({ newcategory });
     } catch (error) {
@@ -60,7 +60,7 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const categoryData = await Category.find();
-    console.log(categoryData);
+
     res.status(200).json({ categorys: categoryData });
   } catch (error) {
     res.status(500).json({ msg: "Server Error" });
@@ -117,8 +117,7 @@ router.get("/:id", async (req, res) => {
 // @access Public
 router.delete("/:id", async (req, res) => {
   try {
-    var category = await Category.findOneAndDelete(req.params.id);
-    console.log(category);
+    await Category.findOneAndDelete(req.params.id);
 
     return res.status(200).json({ msg: "category successfully deleted" });
   } catch (error) {

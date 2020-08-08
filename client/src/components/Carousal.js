@@ -69,28 +69,6 @@ class Carousal extends Component {
               <img
                 style={{ width: "100%", height: "80vh" }}
                 class="d-block"
-                src={`https://ak.picdn.net/shutterstock/videos/1036421099/thumb/4.jpg`}
-                alt="Second slide"
-              />
-              <div
-                class="carousel-caption d-none d-md-block"
-                style={{ backgroundColor: "rgba(0, 0, 0, .4)" }}
-              >
-                <h1>Sale on electronics</h1>
-                <p class="mt-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                </p>
-              </div>
-            </div>
-
-            <div class="carousel-item">
-              <img
-                style={{ width: "100%", height: "80vh" }}
-                class="d-block"
                 src={`https://www.elvin1.com/uploads/1/1/9/0/119082772/vacheta-12-women-4k-banner_orig.jpg`}
                 alt="Third slide"
               />

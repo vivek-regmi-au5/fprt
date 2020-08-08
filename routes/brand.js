@@ -45,7 +45,7 @@ router.post(
         if (image) brandField.image = image;
       }
       const newBrand = new Brand(brandField);
-      console.log(newBrand);
+      
       await newBrand.save();
       res.status(200).json({ newBrand });
     } catch (error) {
@@ -60,7 +60,7 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const brandData = await Brand.find();
-    console.log(brandData);
+   
     res.status(200).json({ brands: brandData });
   } catch (error) {
     res.status(500).json({ msg: "Server Error" });
@@ -117,8 +117,8 @@ router.get("/:id", async (req, res) => {
 // @access Public
 router.delete("/:id", async (req, res) => {
   try {
-    var brand = await Brand.findOneAndDelete(req.params.id);
-    console.log(brand);
+     await Brand.findOneAndDelete(req.params.id);
+    
 
     return res.status(200).json({ msg: "Brand successfully deleted" });
   } catch (error) {

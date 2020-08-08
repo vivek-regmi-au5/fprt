@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Spinner from "./Spinner";
 
-class Home extends Component {
+class Products extends Component {
   state = {
     loading: true,
     data: null,
   };
 
   componentDidMount = async () => {
-    const category = await axios.get("http://localhost:7878/category");
-    console.log(category);
+    const product = await axios.get("http://localhost:7878/product");
+    console.log(product);
     this.setState({
       loading: false,
-      data: category.data.categorys,
+      data: product.data.products,
     });
   };
 
@@ -23,10 +23,9 @@ class Home extends Component {
     const { loading, data } = this.state;
     return (
       <div>
-        <Carousal />
         <div>{loading && <Spinner />}</div>
         <div className="container">
-          <h1 className="my-4">Shop by category</h1>
+          <h1 className="my-4">All products</h1>
           {!loading && (
             <div className="row">
               {data.map((item) => {
@@ -56,4 +55,4 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home);
+export default connect()(Products);

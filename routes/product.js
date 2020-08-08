@@ -59,7 +59,7 @@ router.post(
         if (people) productField.people = people;
       }
       const newproduct = new Product(productField);
-      console.log(newproduct);
+      
       await newproduct.save();
       res.status(200).json({ newproduct });
     } catch (error) {
@@ -75,7 +75,7 @@ router.get("/", async (req, res) => {
   try {
     const productData = await Product.find().populate("person");
 
-    console.log(productData);
+    
     res.status(200).json({ products: productData });
   } catch (error) {
     res.status(500).json({ msg: "Server Error" });
@@ -151,7 +151,7 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     var product = await Product.findOneAndDelete(req.params.id);
-    console.log(product);
+    
 
     return res.status(200).json({ msg: "product successfully deleted" });
   } catch (error) {
