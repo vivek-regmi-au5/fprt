@@ -1,12 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Brands from "./components/Brands";
 import Products from "./components/Products";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
@@ -22,6 +23,15 @@ function App() {
           </Route>
           <Route exact path="/products">
             <Products />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/admin/login">
+            <AdminLogin />
           </Route>
         </Switch>
       </div>

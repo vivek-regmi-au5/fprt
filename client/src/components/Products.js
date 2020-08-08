@@ -33,7 +33,7 @@ class Products extends Component {
                   <div class="col-4 card my-2" style={{ width: "15rem" }}>
                     <img
                       class="card-img-top"
-                      style={{ maxHeight: "14rem" }}
+                      style={{ height: "14rem" }}
                       src={item.image}
                       alt="Card cap"
                     />
