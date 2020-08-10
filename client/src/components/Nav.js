@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from "./../redux/actions/form";
 
 class Nav extends Component {
   render() {
+    const handleSignout = () => {
+      this.props.signOut();
+    };
     return (
       <div>
         {" "}
@@ -44,9 +49,34 @@ class Nav extends Component {
               <Link to="/brands" class="nav-item nav-link">
                 Brands
               </Link>
-              <Link to="/signup" class="nav-item nav-link">
-                Register
-              </Link>
+              {this.props.isAuthenticated ? (
+                <div class="dropdown show">
+                  <a
+                    class="btn btn-light dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Profile
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <Link class="dropdown-item" to="/dashboard">
+                      Dashboard
+                    </Link>
+                    <Link onClick={handleSignout} class="dropdown-item" to="/">
+                      Signout
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <Link to="/signup" class="nav-item nav-link">
+                  Register
+                </Link>
+              )}
             </div>
           </div>
         </nav>
@@ -55,4 +85,10 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, { signOut })(Nav);

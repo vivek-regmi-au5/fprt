@@ -109,7 +109,7 @@ router.post(
 
     try {
       // Check for admin credentials**************************************************************
-
+      console.log(req.body);
       if (
         req.body.password === process.env.ADMIN_PASSWORD &&
         req.body.email === process.env.ADMIN_EMAIL
@@ -121,11 +121,16 @@ router.post(
         });
       } else {
         const person = await Person.findOne({ email: req.body.email });
+        console.log(person);
         if (!person) {
-          return res.status(400).json({ msg: "No user found. Signup instead" });
+          return res
+            .status(400)
+            .json({ errors: [{ msg: "No user found. Signup instead" }] });
         } else {
           if (req.body.password !== person.password) {
-            return res.status(400).json({ msg: "Incorrect email or password" });
+            return res
+              .status(400)
+              .json({ errors: [{ msg: "Incorrect email or password" }] });
           } else {
             return res.status(200).json(person);
           }

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { signupFormSubmit } from "./../redux/actions/form";
 import { connect } from "react-redux";
+import Alert from "./Alert";
+import { withRouter } from "react-router-dom";
 
-const Signup = ({ signupFormSubmit }) => {
+const Signup = (props) => {
   const [loading, setLoading] = useState(false);
   const [uploadPercent, setUpload] = useState(0);
   const [formData, setFormData] = useState({
@@ -45,16 +47,19 @@ const Signup = ({ signupFormSubmit }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    signupFormSubmit(formData);
+    await props.signupFormSubmit(formData);
+    props.history.push(`/dashboard`);
   };
 
   return (
     <form onSubmit={handleFormSubmit}>
+      <div className="container mt-5">
+        <Alert />
+      </div>
       <h1 className="text-center mt-5">Signup</h1>
       <div className="row">
         <div className="col-10 offset-1">
           <div className="row">
-            {" "}
             <div className="col-6 mt-5 " style={{ marginBottom: "90px" }}>
               <div class="form-group">
                 <label for="name">Name</label>
@@ -93,7 +98,6 @@ const Signup = ({ signupFormSubmit }) => {
                   }
                 />
               </div>
-
               <div class="form-group">
                 <label for="image">Example file input</label>
                 <input
@@ -176,4 +180,14 @@ const Signup = ({ signupFormSubmit }) => {
   );
 };
 
-export default connect(null, { signupFormSubmit })(Signup);
+const mapStateToProps = (state) => {
+  return {
+    alerts: state.alerts,
+    isAuthenticated: state.auth.isAuthenticated,
+    type: state.auth.type,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, { signupFormSubmit })(Signup)
+);

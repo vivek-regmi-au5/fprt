@@ -2,15 +2,13 @@ import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import alertReducer from "./reducers/alert";
 
-var rootReducer = combineReducers({
-  alerts: alertReducer,
-});
+import { persistStore } from "redux-persist";
+import rootReducer from "./reducers/index";
 
-var store = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-export default store;
+export const persistor = persistStore(store);

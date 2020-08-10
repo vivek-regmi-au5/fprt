@@ -8,6 +8,7 @@ import Products from "./components/Products";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import AdminLogin from "./components/AdminLogin";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/admin/login">
             <AdminLogin />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
           </Route>
         </Switch>
       </div>
