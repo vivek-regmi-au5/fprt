@@ -9,8 +9,10 @@ import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import AdminLogin from "./components/AdminLogin";
 import Dashboard from "./components/Dashboard";
+import AddProductForm from "./components/AddProductForm";
+import { connect } from "react-redux";
 
-function App() {
+function App({ isAuthenticated }) {
   return (
     <div className="App">
       <Nav />
@@ -26,7 +28,7 @@ function App() {
             <Products />
           </Route>
           <Route exact path="/signup">
-            <Signup />
+            {isAuthenticated ? <Dashboard /> : <Signup />}
           </Route>
           <Route exact path="/signin">
             <Signin />
@@ -37,6 +39,9 @@ function App() {
           <Route exact path="/dashboard">
             <Dashboard />
           </Route>
+          <Route exact path="/vendor/addProduct">
+            <AddProductForm />
+          </Route>
         </Switch>
       </div>
       <Footer />
@@ -44,4 +49,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(App);

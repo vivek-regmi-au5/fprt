@@ -3,7 +3,7 @@ import { setAlert } from "./alert";
 import { PEOPLE_SIGNUP, CLEAN_UP, PEOPLE_SIGNIN } from "./../types";
 
 export const signupFormSubmit = (data) => {
-  return async (dispatch) => {
+  return async (dispatch, props) => {
     try {
       const res = await axios.post("http://localhost:7878/people/signup", data);
       console.log("res at profileme: ", res);
@@ -14,7 +14,6 @@ export const signupFormSubmit = (data) => {
         type: PEOPLE_SIGNUP,
         payload: res,
       });
-      // history.push("/dashboard");
     } catch (err) {
       console.log(err);
       const errors = err.response.data.errors;

@@ -20,7 +20,14 @@ router.get("/test", (req, res) => {
 // @access Public
 router.post(
   "/",
-  [check("name", "Name cannot be empty").not().isEmpty()],
+  [
+    check("name", "Name cannot be empty").not().isEmpty(),
+    check("price", "Price cannot be empty").not().isEmpty(),
+    check("status", "Status cannot be empty").not().isEmpty(),
+    check("quantity", "Quantity cannot be empty").not().isEmpty(),
+    check("category", "Category cannot be empty").not().isEmpty(),
+    check("brand", "Brand cannot be empty").not().isEmpty(),
+  ],
 
   async (req, res) => {
     var errors = validationResult(req);
@@ -35,6 +42,7 @@ router.post(
           .status(400)
           .json({ errors: [{ msg: "product name already exists." }] });
       } else {
+        console.log("body data: ", req.body);
         const {
           name,
           image,
