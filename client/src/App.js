@@ -11,18 +11,23 @@ import AdminLogin from "./components/AdminLogin";
 import Dashboard from "./components/Dashboard";
 import AddProductForm from "./components/AddProductForm";
 import { connect } from "react-redux";
+import Categories from "./components/Categories";
+import Users from "./components/Users";
 
 function App({ isAuthenticated }) {
   return (
     <div className="App">
       <Nav />
-      <div>
+      <div style={{ minHeight: "75vh" }}>
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
           <Route exact path="/brands">
             <Brands />
+          </Route>
+          <Route exact path="/users">
+            <Users />
           </Route>
           <Route exact path="/products">
             <Products />
@@ -31,16 +36,19 @@ function App({ isAuthenticated }) {
             {isAuthenticated ? <Dashboard /> : <Signup />}
           </Route>
           <Route exact path="/signin">
-            <Signin />
+            {isAuthenticated ? <Dashboard /> : <Signin />}
           </Route>
           <Route exact path="/admin/login">
-            <AdminLogin />
+            {isAuthenticated ? <Dashboard /> : <AdminLogin />}
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
           </Route>
           <Route exact path="/vendor/addProduct">
             <AddProductForm />
+          </Route>
+          <Route exact path="/categories">
+            <Categories />
           </Route>
         </Switch>
       </div>

@@ -1,4 +1,4 @@
-import { PEOPLE_SIGNUP, CLEAN_UP, PEOPLE_SIGNIN } from "../types";
+import { PEOPLE_SIGNUP, CLEAN_UP, PEOPLE_SIGNIN, ADMIN_LOGIN } from "../types";
 
 var initialState = {
   isAuthenticated: false,
@@ -29,6 +29,13 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         type: payload.data.type,
         user: payload.data,
+      };
+
+    case ADMIN_LOGIN:
+      return {
+        ...state,
+        isAuthenticated: true,
+        type: "admin",
       };
 
     default:

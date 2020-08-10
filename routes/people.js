@@ -47,6 +47,7 @@ router.post(
             authenticated: true,
             admin: true,
             email: "vivek3639@gmail.com",
+            type: "admin",
           });
         } else {
           return res

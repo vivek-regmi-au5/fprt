@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-import Carousal from "./Carousal";
 import { connect } from "react-redux";
 import axios from "axios";
 import Spinner from "./Spinner";
 
-class Brands extends Component {
+class Categories extends Component {
   state = {
     loading: true,
     data: null,
   };
 
   componentDidMount = async () => {
-    const brand = await axios.get("http://localhost:7878/brand");
-    console.log(brand);
+    const category = await axios.get("http://localhost:7878/category");
+    console.log(category);
     this.setState({
       loading: false,
-      data: brand.data.brands,
+      data: category.data.categorys,
     });
   };
 
@@ -25,7 +24,7 @@ class Brands extends Component {
       <div>
         <div>{loading && <Spinner />}</div>
         <div className="container">
-          <h1 className="my-4">All brands</h1>
+          <h1 className="my-4">Categories</h1>
           {!loading && (
             <div className="row">
               {data.map((item) => {
@@ -40,20 +39,12 @@ class Brands extends Component {
                     <div class="card-body">
                       <h5 class="card-title">{item.name}</h5>
 
-                      {this.props.type === "admin" ? (
-                        [
-                          <a href="#" class="btn btn-primary">
-                            Update
-                          </a>,
-                          <a href="#" class="btn btn-danger">
-                            Remove
-                          </a>,
-                        ]
-                      ) : (
-                        <a href="#" class="btn btn-primary">
-                          Shop Now
-                        </a>
-                      )}
+                      <a href="#" class="btn btn-primary">
+                        Update
+                      </a>
+                      <a href="#" class="btn btn-danger">
+                        Remove
+                      </a>
                     </div>
                   </div>
                 );
@@ -66,10 +57,4 @@ class Brands extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    type: state.auth.type,
-  };
-};
-
-export default connect(mapStateToProps)(Brands);
+export default connect()(Categories);

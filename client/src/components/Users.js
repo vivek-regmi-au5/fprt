@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Spinner from "./Spinner";
 
-class Brands extends Component {
+class Users extends Component {
   state = {
     loading: true,
     data: null,
   };
 
   componentDidMount = async () => {
-    const brand = await axios.get("http://localhost:7878/brand");
-    console.log(brand);
+    const people = await axios.get("http://localhost:7878/people");
+    console.log("people data: ", people);
     this.setState({
       loading: false,
-      data: brand.data.brands,
+      data: people.data.persons,
     });
   };
 
@@ -25,7 +25,7 @@ class Brands extends Component {
       <div>
         <div>{loading && <Spinner />}</div>
         <div className="container">
-          <h1 className="my-4">All brands</h1>
+          <h1 className="my-4">All Users</h1>
           {!loading && (
             <div className="row">
               {data.map((item) => {
@@ -39,21 +39,13 @@ class Brands extends Component {
                     />
                     <div class="card-body">
                       <h5 class="card-title">{item.name}</h5>
-
-                      {this.props.type === "admin" ? (
-                        [
-                          <a href="#" class="btn btn-primary">
-                            Update
-                          </a>,
-                          <a href="#" class="btn btn-danger">
-                            Remove
-                          </a>,
-                        ]
-                      ) : (
-                        <a href="#" class="btn btn-primary">
-                          Shop Now
-                        </a>
-                      )}
+                      <p>{item.type}</p>
+                      <a href="#" class="btn btn-primary">
+                        Update
+                      </a>
+                      <a href="#" class="btn btn-danger">
+                        Remove
+                      </a>
                     </div>
                   </div>
                 );
@@ -72,4 +64,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Brands);
+export default connect(mapStateToProps)(Users);

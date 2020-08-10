@@ -6,6 +6,7 @@ export const addProduct = (data) => {
     try {
       const res = await axios.post(`http://localhost:7878/product`, data);
       console.log("product: ", res);
+      dispatch(setAlert("Product successfully added", "success"));
     } catch (err) {
       const errors = err.response.data.errors;
       console.log(errors);

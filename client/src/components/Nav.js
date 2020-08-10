@@ -11,75 +11,136 @@ class Nav extends Component {
     return (
       <div>
         {" "}
-        <nav class="navbar navbar-expand-md navbar-light bg-light ">
-          <Link to="/" class="navbar-brand">
-            CMSLogo
-          </Link>
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <form
-              class="form-inline my-2 my-lg-0"
-              style={{ marginLeft: "25%" }}
+        {this.props.type === "admin" && (
+          <nav class="navbar navbar-expand-md navbar-light bg-light ">
+            <Link to="/dashboard" class="navbar-brand">
+              CMSLogo
+            </Link>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
             >
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </button>
-            </form>
-            <div class="navbar-nav ml-auto">
-              <Link to="/products" class="nav-item nav-link">
-                Products
-              </Link>
-              <Link to="/brands" class="nav-item nav-link">
-                Brands
-              </Link>
-              {this.props.isAuthenticated ? (
-                <div class="dropdown show">
-                  <a
-                    class="btn btn-light dropdown-toggle"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Profile
-                  </a>
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <Link class="dropdown-item" to="/dashboard">
-                      Dashboard
-                    </Link>
-                    <Link onClick={handleSignout} class="dropdown-item" to="/">
-                      Signout
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <Link to="/signup" class="nav-item nav-link">
-                  Register
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <form
+                class="form-inline my-2 my-lg-0"
+                style={{ marginLeft: "15%" }}
+              >
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </form>
+              <div class="navbar-nav ml-auto">
+                <Link to="/users" class="nav-item nav-link">
+                  Users
                 </Link>
-              )}
+                <Link to="/products" class="nav-item nav-link">
+                  Products
+                </Link>
+                <Link to="/brands" class="nav-item nav-link">
+                  Brands
+                </Link>
+                <Link to="/categories" class="nav-item nav-link">
+                  Categories
+                </Link>
+                <Link onClick={handleSignout} class="nav-item nav-link" to="/">
+                  Signout
+                </Link>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
+        )}
+        {this.props.type !== "admin" && (
+          <nav class="navbar navbar-expand-md navbar-light bg-light ">
+            <Link to="/" class="navbar-brand">
+              CMSLogo
+            </Link>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <form
+                class="form-inline my-2 my-lg-0"
+                style={{ marginLeft: "25%" }}
+              >
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </form>
+              <div class="navbar-nav ml-auto">
+                <Link to="/products" class="nav-item nav-link">
+                  Products
+                </Link>
+                <Link to="/brands" class="nav-item nav-link">
+                  Brands
+                </Link>
+                {this.props.isAuthenticated ? (
+                  <div class="dropdown show">
+                    <a
+                      class="btn btn-light dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Profile
+                    </a>
+
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <Link class="dropdown-item" to="/dashboard">
+                        Dashboard
+                      </Link>
+                      <Link
+                        onClick={handleSignout}
+                        class="dropdown-item"
+                        to="/"
+                      >
+                        Signout
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <Link to="/signup" class="nav-item nav-link">
+                    Register
+                  </Link>
+                )}
+              </div>
+            </div>
+          </nav>
+        )}
       </div>
     );
   }
@@ -88,6 +149,7 @@ class Nav extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
+    type: state.auth.type,
   };
 };
 

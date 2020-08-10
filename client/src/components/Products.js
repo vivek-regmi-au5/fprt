@@ -40,9 +40,20 @@ class Products extends Component {
                     <div class="card-body">
                       <h5 class="card-title">{item.name}</h5>
 
-                      <a href="#" class="btn btn-primary">
-                        Shop Now
-                      </a>
+                      {this.props.type === "admin" ? (
+                        [
+                          <a href="#" class="btn btn-primary">
+                            Update
+                          </a>,
+                          <a href="#" class="btn btn-danger">
+                            Remove
+                          </a>,
+                        ]
+                      ) : (
+                        <a href="#" class="btn btn-primary">
+                          Shop Now
+                        </a>
+                      )}
                     </div>
                   </div>
                 );
@@ -55,4 +66,10 @@ class Products extends Component {
   }
 }
 
-export default connect()(Products);
+const mapStateToProps = (state) => {
+  return {
+    type: state.auth.type,
+  };
+};
+
+export default connect(mapStateToProps)(Products);

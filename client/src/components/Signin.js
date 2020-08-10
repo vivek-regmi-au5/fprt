@@ -5,11 +5,10 @@ import { connect } from "react-redux";
 import Alert from "./Alert";
 import { withRouter } from "react-router-dom";
 
-const Signin = ({ signinFormSubmit, history }) => {
+const Signin = ({ signinFormSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signinFormSubmit(formData);
-    history.push(`/dashboard`);
   };
 
   const [formData, setFormData] = useState({

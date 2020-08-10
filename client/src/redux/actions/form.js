@@ -1,6 +1,11 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { PEOPLE_SIGNUP, CLEAN_UP, PEOPLE_SIGNIN } from "./../types";
+import {
+  PEOPLE_SIGNUP,
+  CLEAN_UP,
+  PEOPLE_SIGNIN,
+  ADMIN_LOGIN,
+} from "./../types";
 
 export const signupFormSubmit = (data) => {
   return async (dispatch, props) => {
@@ -57,6 +62,30 @@ export const signOut = () => {
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const adminFormSubmit = (data) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post("http://localhost:7878/people/signin", data);
+      console.log("res at signin: ", res);
+      dispatch({
+        type: CLEAN_UP,
+      });
+      dispatch({
+        type: ADMIN_LOGIN,
+      });
+
+      // history.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+      const errors = err.response.data.errors;
+      console.log(errors);
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+      }
     }
   };
 };
