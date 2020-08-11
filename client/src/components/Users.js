@@ -1,34 +1,26 @@
 import React, { Component } from "react";
-import Carousal from "./Carousal";
 import { connect } from "react-redux";
-import axios from "axios";
 import Spinner from "./Spinner";
+import { getUsers, deleteUser } from "./../redux/actions/user";
 
 class Users extends Component {
-  state = {
-    loading: true,
-    data: null,
+  handleDeleteUser = async (id) => {
+    await this.props.deleteUser(id);
   };
 
   componentDidMount = async () => {
-    const people = await axios.get("http://localhost:7878/people");
-    console.log("people data: ", people);
-    this.setState({
-      loading: false,
-      data: people.data.persons,
-    });
+    await this.props.getUsers();
   };
 
   render() {
-    const { loading, data } = this.state;
     return (
       <div>
-        <div>{loading && <Spinner />}</div>
+        <div>{!this.props.users && <Spinner />}</div>
         <div className="container">
           <h1 className="my-4">All Users</h1>
-          {!loading && (
+          {this.props.users && (
             <div className="row">
-              {data.map((item) => {
+              {this.props.users.map((item) => {
                 return (
                   <div class="col-4 card my-2" style={{ width: "15rem" }}>
                     <img
@@ -40,12 +32,13 @@ class Users extends Component {
                     <div class="card-body">
                       <h5 class="card-title">{item.name}</h5>
                       <p>{item.type}</p>
-                      <a href="#" class="btn btn-primary">
-                        Update
-                      </a>
-                      <a href="#" class="btn btn-danger">
+                      <button class="btn btn-primary">Update</button>
+                      <button
+                        onClick={() => this.handleDeleteUser(item._id)}
+                        class="btn btn-danger"
+                      >
                         Remove
-                      </a>
+                      </button>
                     </div>
                   </div>
                 );
@@ -61,7 +54,8 @@ class Users extends Component {
 const mapStateToProps = (state) => {
   return {
     type: state.auth.type,
+    users: state.users.users,
   };
 };
 
-export default connect(mapStateToProps)(Users);
+export default connect(mapStateToProps, { getUsers, deleteUser })(Users);

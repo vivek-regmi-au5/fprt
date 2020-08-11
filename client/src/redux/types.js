@@ -7,3 +7,7 @@ export const SET_VENDOR_PRODUCTS = "SET_VENDOR_PRODUCTS";
 export const GET_BRANDS = "GET_BRANDS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ADMIN_LOGIN = "ADMIN_LOGIN";
+export const DELETE_USER = "DELETE_USER";
+export const ADD_USERS = "ADD_USERS";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const ADD_PRODUCTS = "ADD_PRODUCTS";

@@ -1,5 +1,21 @@
 import axios from "axios";
 import { setAlert } from "./../actions/alert";
+import { DELETE_PRODUCT, ADD_PRODUCTS } from "./../types";
+
+export const getProducts = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`http://localhost:7878/product`);
+      console.log("products: ", res);
+      dispatch({
+        type: ADD_PRODUCTS,
+        payload: res,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 export const addProduct = (data) => {
   return async (dispatch) => {
@@ -13,6 +29,22 @@ export const addProduct = (data) => {
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
       }
+    }
+  };
+};
+
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`http://localhost:7878/product/${id}`);
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: id,
+      });
+
+      dispatch(setAlert("Product is deleted", "success"));
+    } catch (err) {
+      console.log(err);
     }
   };
 };

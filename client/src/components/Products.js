@@ -1,34 +1,26 @@
 import React, { Component } from "react";
-import Carousal from "./Carousal";
 import { connect } from "react-redux";
-import axios from "axios";
 import Spinner from "./Spinner";
+import { getProducts, deleteProduct } from "./../redux/actions/product";
 
 class Products extends Component {
-  state = {
-    loading: true,
-    data: null,
+  componentDidMount = async () => {
+    await this.props.getProducts();
   };
 
-  componentDidMount = async () => {
-    const product = await axios.get("http://localhost:7878/product");
-    console.log(product);
-    this.setState({
-      loading: false,
-      data: product.data.products,
-    });
+  handleDeleteProduct = async (id) => {
+    await this.props.deleteProduct(id);
   };
 
   render() {
-    const { loading, data } = this.state;
     return (
       <div>
-        <div>{loading && <Spinner />}</div>
+        <div>{!this.props.products && <Spinner />}</div>
         <div className="container">
           <h1 className="my-4">All products</h1>
-          {!loading && (
+          {this.props.products && (
             <div className="row">
-              {data.map((item) => {
+              {this.props.products.map((item) => {
                 return (
                   <div class="col-4 card my-2" style={{ width: "15rem" }}>
                     <img
@@ -42,12 +34,13 @@ class Products extends Component {
 
                       {this.props.type === "admin" ? (
                         [
-                          <a href="#" class="btn btn-primary">
-                            Update
-                          </a>,
-                          <a href="#" class="btn btn-danger">
+                          <button class="btn btn-primary">Update</button>,
+                          <button
+                            onClick={() => this.handleDeleteProduct(item._id)}
+                            class="btn btn-danger"
+                          >
                             Remove
-                          </a>,
+                          </button>,
                         ]
                       ) : (
                         <a href="#" class="btn btn-primary">
@@ -69,7 +62,10 @@ class Products extends Component {
 const mapStateToProps = (state) => {
   return {
     type: state.auth.type,
+    products: state.products.products,
   };
 };
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps, { getProducts, deleteProduct })(
+  Products
+);
