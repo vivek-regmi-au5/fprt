@@ -19,10 +19,6 @@ mongoose.connect(
   }
 );
 
-app.get("/", (req, res) => {
-  res.send("Test route");
-});
-
 app.use("/people", require("./routes/people"));
 app.use("/product", require("./routes/product"));
 app.use("/category", require("./routes/category"));
