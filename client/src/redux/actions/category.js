@@ -4,7 +4,7 @@ import { GET_CATEGORIES } from "./../types";
 export const getCategories = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:7878/category`);
+      const res = await axios.get(`/category`);
       console.log("categories: ", res);
 
       dispatch({

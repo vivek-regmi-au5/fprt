@@ -4,7 +4,7 @@ import { SET_VENDOR_PRODUCTS } from "./../types";
 export const getVendorProducts = (id) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:7878/product/${id}`);
+      const res = await axios.get(`/product/${id}`);
       console.log("vendor products: ", res);
 
       dispatch({

@@ -5,7 +5,7 @@ import { setAlert } from "./../actions/alert";
 export const getBrands = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:7878/brand`);
+      const res = await axios.get(`/brand`);
       console.log("brands: ", res);
 
       dispatch({
@@ -22,7 +22,7 @@ export const getBrands = () => {
 export const deleteBrand = (id) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:7878/brand/${id}`);
+      await axios.delete(`/brand/${id}`);
       dispatch({
         type: DELETE_BRAND,
         payload: id,

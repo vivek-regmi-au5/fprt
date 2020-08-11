@@ -10,7 +10,7 @@ import {
 export const signupFormSubmit = (data) => {
   return async (dispatch, props) => {
     try {
-      const res = await axios.post("http://localhost:7878/people/signup", data);
+      const res = await axios.post("/people/signup", data);
       console.log("res at profileme: ", res);
       dispatch({
         type: CLEAN_UP,
@@ -33,7 +33,7 @@ export const signupFormSubmit = (data) => {
 export const signinFormSubmit = (data) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post("http://localhost:7878/people/signin", data);
+      const res = await axios.post("/people/signin", data);
       console.log("res at signin: ", res);
       dispatch({
         type: CLEAN_UP,
@@ -69,7 +69,7 @@ export const signOut = () => {
 export const adminFormSubmit = (data) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post("http://localhost:7878/people/signin", data);
+      const res = await axios.post("/people/signin", data);
       console.log("res at signin: ", res);
       dispatch({
         type: CLEAN_UP,

@@ -5,7 +5,7 @@ import { DELETE_PRODUCT, ADD_PRODUCTS } from "./../types";
 export const getProducts = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:7878/product`);
+      const res = await axios.get(`/product`);
       console.log("products: ", res);
       dispatch({
         type: ADD_PRODUCTS,
@@ -20,7 +20,7 @@ export const getProducts = () => {
 export const addProduct = (data) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:7878/product`, data);
+      const res = await axios.post(`/product`, data);
       console.log("product: ", res);
       dispatch(setAlert("Product successfully added", "success"));
     } catch (err) {
@@ -36,7 +36,7 @@ export const addProduct = (data) => {
 export const deleteProduct = (id) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:7878/product/${id}`);
+      await axios.delete(`/product/${id}`);
       dispatch({
         type: DELETE_PRODUCT,
         payload: id,
