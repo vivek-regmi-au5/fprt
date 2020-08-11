@@ -22,7 +22,11 @@ class Products extends Component {
             <div className="row">
               {this.props.products.map((item) => {
                 return (
-                  <div class="col-4 card my-2" style={{ width: "15rem" }}>
+                  <div
+                    key={item._id}
+                    class="col-4 card my-2"
+                    style={{ width: "15rem" }}
+                  >
                     <img
                       class="card-img-top"
                       style={{ height: "14rem" }}
@@ -34,8 +38,11 @@ class Products extends Component {
 
                       {this.props.type === "admin" ? (
                         [
-                          <button class="btn btn-primary">Update</button>,
+                          <button key={1} class="btn btn-primary">
+                            Update
+                          </button>,
                           <button
+                            key={2}
                             onClick={() => this.handleDeleteProduct(item._id)}
                             class="btn btn-danger"
                           >

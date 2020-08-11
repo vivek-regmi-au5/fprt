@@ -1,5 +1,6 @@
 import axios from "axios";
-import { GET_BRANDS } from "./../types";
+import { GET_BRANDS, DELETE_BRAND } from "./../types";
+import { setAlert } from "./../actions/alert";
 
 export const getBrands = () => {
   return async (dispatch) => {
@@ -12,6 +13,22 @@ export const getBrands = () => {
         payload: res,
       });
       // history.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const deleteBrand = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`http://localhost:7878/brand/${id}`);
+      dispatch({
+        type: DELETE_BRAND,
+        payload: id,
+      });
+
+      dispatch(setAlert("Brand is deleted", "success"));
     } catch (err) {
       console.log(err);
     }

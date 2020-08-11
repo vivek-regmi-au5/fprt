@@ -3,34 +3,32 @@ import Carousal from "./Carousal";
 import { connect } from "react-redux";
 import axios from "axios";
 import Spinner from "./Spinner";
+import { getBrands, deleteBrand } from "./../redux/actions/brand";
 
 class Brands extends Component {
-  state = {
-    loading: true,
-    data: null,
+  componentDidMount = async () => {
+    await this.props.getBrands();
   };
 
-  componentDidMount = async () => {
-    const brand = await axios.get("http://localhost:7878/brand");
-    console.log(brand);
-    this.setState({
-      loading: false,
-      data: brand.data.brands,
-    });
+  handleDeleteBrand = async (id) => {
+    await this.props.deleteBrand(id);
   };
 
   render() {
-    const { loading, data } = this.state;
     return (
       <div>
-        <div>{loading && <Spinner />}</div>
+        <div>{!this.props.brands && <Spinner />}</div>
         <div className="container">
           <h1 className="my-4">All brands</h1>
-          {!loading && (
+          {this.props.brands && (
             <div className="row">
-              {data.map((item) => {
+              {this.props.brands.map((item) => {
                 return (
-                  <div class="col-4 card my-2" style={{ width: "15rem" }}>
+                  <div
+                    key={item._id}
+                    class="col-4 card my-2"
+                    style={{ width: "15rem" }}
+                  >
                     <img
                       class="card-img-top"
                       style={{ maxHeight: "14rem" }}
@@ -42,12 +40,20 @@ class Brands extends Component {
 
                       {this.props.type === "admin" ? (
                         [
-                          <a href="#" class="btn btn-primary">
+                          <button key={1} class="btn btn-primary">
                             Update
-                          </a>,
-                          <a href="#" class="btn btn-danger">
+                          </button>,
+                          <button
+                            key={2}
+                            onClick={() => {
+                              console.log(item._id);
+                              console.log(item.name);
+                              this.handleDeleteBrand(item._id);
+                            }}
+                            class="btn btn-danger"
+                          >
                             Remove
-                          </a>,
+                          </button>,
                         ]
                       ) : (
                         <a href="#" class="btn btn-primary">
@@ -69,7 +75,8 @@ class Brands extends Component {
 const mapStateToProps = (state) => {
   return {
     type: state.auth.type,
+    brands: state.brands.brands,
   };
 };
 
-export default connect(mapStateToProps)(Brands);
+export default connect(mapStateToProps, { getBrands, deleteBrand })(Brands);
