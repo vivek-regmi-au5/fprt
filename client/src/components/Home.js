@@ -8,7 +8,7 @@ import { getCategories } from "./../redux/actions/category";
 const Home = ({ getCategories, categories }) => {
   useEffect(() => {
     getCategories();
-  }, []);
+  });
 
   return (
     <div>
