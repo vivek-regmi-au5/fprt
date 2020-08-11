@@ -1,4 +1,4 @@
-import { GET_CATEGORIES } from "./../types";
+import { GET_CATEGORIES, CLEAR_CATEGORIES } from "./../types";
 
 const initialState = {
   categories: null,
@@ -7,6 +7,10 @@ const initialState = {
 const cayegoryReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case CLEAR_CATEGORIES:
+      return {
+        categories: null,
+      };
     case GET_CATEGORIES:
       return {
         ...state,

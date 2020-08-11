@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CATEGORIES } from "./../types";
+import { GET_CATEGORIES, CLEAR_CATEGORIES } from "./../types";
 
 export const getCategories = () => {
   return async (dispatch) => {
@@ -7,6 +7,9 @@ export const getCategories = () => {
       const res = await axios.get(`/category`);
       console.log("categories: ", res);
 
+      dispatch({
+        type: CLEAR_CATEGORIES,
+      });
       dispatch({
         type: GET_CATEGORIES,
         payload: res,

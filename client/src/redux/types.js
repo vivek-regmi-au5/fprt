@@ -12,3 +12,4 @@ export const ADD_USERS = "ADD_USERS";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const ADD_PRODUCTS = "ADD_PRODUCTS";
 export const DELETE_BRAND = "DELETE_BRAND";
+export const CLEAR_CATEGORIES = "CLEAR_CATEGORIES";
