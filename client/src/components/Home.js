@@ -11,7 +11,7 @@ class Home extends Component {
   };
 
   componentDidMount = async () => {
-    const category = await axios.get("http://localhost:7878/category");
+    const category = await axios.get("/category");
     console.log(category);
     this.setState({
       loading: false,
